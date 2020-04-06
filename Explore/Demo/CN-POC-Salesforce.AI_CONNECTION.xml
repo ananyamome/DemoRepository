@@ -1,0 +1,60 @@
+<aetgt:getResponse xmlns:aetgt="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"
+                   xmlns:types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd">
+   <types1:Item>
+      <types1:EntryId>CNYcmYsGuDoWn2s-gt-1338320-2019-10-31T09:37:53.454Z::conn.xml</types1:EntryId>
+      <types1:Name>CN-POC-Salesforce</types1:Name>
+      <types1:ParentFlowIds>8cmbeMVX3cjk91p-gt-2963025-2019-11-07T11:48:39.959Z::pd.xml,gbdutaaabbgdoGs-gt-7961076-2019-11-07T20:25:12.101Z::pd.xml,hD0wWcn6Hbf13Er-gt-7960239-2019-11-07T20:23:49.121Z::pd.xml,hMFmabeAzu2JQht-gt-8069375-2019-12-09T05:30:25.127Z::pd.xml</types1:ParentFlowIds>
+      <types1:MimeType>application/xml+connection</types1:MimeType>
+      <types1:Description/>
+      <types1:AppliesTo/>
+      <types1:Tags/>
+      <types1:VersionLabel>1.0</types1:VersionLabel>
+      <types1:State>CURRENT</types1:State>
+      <types1:ProcessGroup/>
+      <types1:CreatedBy>anchoudhury@informatica.com</types1:CreatedBy>
+      <types1:CreationDate>2019-10-31T09:37:53Z</types1:CreationDate>
+      <types1:ModifiedBy>anchoudhury@informatica.com</types1:ModifiedBy>
+      <types1:ModificationDate>2019-12-26T15:11:43Z</types1:ModificationDate>
+      <types1:PublicationStatus>published</types1:PublicationStatus>
+      <types1:PublishedBy>anchoudhury@informatica.com</types1:PublishedBy>
+      <types1:PublicationDate>2019-12-26T15:12:42Z</types1:PublicationDate>
+      <types1:PublishedContributionId>project:/rt.connection/CN-POC-Salesforce/CN-POC-Salesforce.conn.xml</types1:PublishedContributionId>
+      <types1:AutosaveExists>false</types1:AutosaveExists>
+      <types1:Entry>
+         <connection xmlns="http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd"
+                     displayName="CN-POC-Salesforce"
+                     label="CN-POC-Salesforce"
+                     name="CN-POC-Salesforce">
+            <description/>
+            <tags/>
+            <agent/>
+            <attributes/>
+            <soaConnector xmlns="http://schemas.informatica.com/appmodules/screenflow/2014/04/avosConnectors.xsd"
+                          connectorPath="project:/com.activevos.cumulus.cloud.extend.playbook.configuration/config/sfConnector.xml"
+                          name="Salesforce"
+                          supportsConnectionTest="true"
+                          supportsOData="true"
+                          uuid="05fc48f1-e6e1-441b-b700-bac396ca2ed1">
+               <description>Salesforce.com SOA based data connector.</description>
+            </soaConnector>
+            <authentication type="$infa_basicform">
+               <attributes>
+                  <attribute encrypted="false"
+                             name="username"
+                             value="ananyamome@informatica.com"/>
+                  <attribute encrypted="true" name="password" value=""/>
+                  <attribute encrypted="true" name="token" value=""/>
+                  <attribute encrypted="false"
+                             name="serviceUrl"
+                             value="https://login.salesforce.com/services/Soap/c/47.0"/>
+                  <attribute encrypted="true" name="clientId" value=""/>
+                  <attribute encrypted="true" name="clientSecret" value=""/>
+               </attributes>
+            </authentication>
+         </connection>
+      </types1:Entry>
+      <types1:GUID>a4GJYT4eq97emON2YTAR6b</types1:GUID>
+      <types1:DisplayName>CN-POC-Salesforce</types1:DisplayName>
+   </types1:Item>
+   <types1:CurrentServerDateTime>2020-04-06T19:12:57.672Z</types1:CurrentServerDateTime>
+</aetgt:getResponse>

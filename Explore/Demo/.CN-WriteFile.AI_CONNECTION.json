@@ -1,0 +1,24 @@
+{
+  "objectInfo" : {
+    "id" : "iyoyePaJVSffI9RmEe5max",
+    "name" : "CN-WriteFile",
+    "type" : "AI_CONNECTION",
+    "metadata" : {
+      "modelVersion" : {
+        "major" : 1,
+        "minor" : 0
+      },
+      "repoInfo" : {
+        "repoHandle" : "drHMUvIw8jIw8jI-gt-480199-2019-04-08T06:46:11.052Z::conn.xml"
+      },
+      "contextAttributes" : null,
+      "additionalInfo" : {
+        "description" : "",
+        "contentType" : "application/json; charset=utf-8",
+        "documentState" : "VALID"
+      }
+    }
+  },
+  "dataFileExtension" : "xml",
+  "objectRefs" : [ ]
+}

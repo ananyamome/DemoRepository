@@ -1,0 +1,24 @@
+{
+  "objectInfo" : {
+    "id" : "8IhIIECdTjFkeD4X9uSdce",
+    "name" : "SC-IICS-REST_API-Test",
+    "type" : "AI_SERVICE_CONNECTOR",
+    "metadata" : {
+      "modelVersion" : {
+        "major" : 1,
+        "minor" : 0
+      },
+      "repoInfo" : {
+        "repoHandle" : "i78OHDvGFaaaaaa-gt-516799-2019-04-08T06:46:11.139Z::svc.xml"
+      },
+      "contextAttributes" : null,
+      "additionalInfo" : {
+        "description" : "",
+        "contentType" : "application/json; charset=utf-8",
+        "documentState" : "VALID"
+      }
+    }
+  },
+  "dataFileExtension" : "xml",
+  "objectRefs" : [ ]
+}
