@@ -75,11 +75,14 @@
       "repoInfo" : {
         "repoHandle" : "0107OR1700000000002O"
       },
-      "contextAttributes" : null,
+      "contextAttributes" : [ {
+        "name" : "id",
+        "value" : "@1"
+      } ],
       "additionalInfo" : {
         "description" : "",
         "contentType" : "JSON",
-        "documentState" : "INVALID"
+        "documentState" : "VALID"
       }
     },
     "path" : "/Explore/Demo"
