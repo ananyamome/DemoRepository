@@ -1,0 +1,2737 @@
+<aetgt:getResponse xmlns:aetgt="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"
+                   xmlns:types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd">
+   <types1:Item>
+      <types1:EntryId>DLdw8jIw8jIw8jI-gt-14652398-2020-04-06T18:44:50.475Z::svc.xml</types1:EntryId>
+      <types1:Name>SC-SFDC-SOAP-2</types1:Name>
+      <types1:MimeType>application/xml+businesssconnector</types1:MimeType>
+      <types1:Description>Salesforce  SOAP API  Connector to create, retrieve, update or delete records, such as accounts, leads, and custom objects. With more than 20 different calls, SOAP API also allows you to maintain passwords, perform searches, and much more.</types1:Description>
+      <types1:AppliesTo/>
+      <types1:Tags>SFDC,Workday,soap</types1:Tags>
+      <types1:VersionLabel>1.0</types1:VersionLabel>
+      <types1:State>CURRENT</types1:State>
+      <types1:ProcessGroup/>
+      <types1:CreatedBy>anchoudhury@informatica.com</types1:CreatedBy>
+      <types1:CreationDate>2020-04-06T18:44:50Z</types1:CreationDate>
+      <types1:ModifiedBy/>
+      <types1:PublicationStatus>unpublished</types1:PublicationStatus>
+      <types1:AutosaveExists>false</types1:AutosaveExists>
+      <types1:Entry>
+         <businessConnector xmlns="http://schemas.informatica.com/socrates/data-services/2014/05/business-connector-model.xsd"
+                            agentOnly="false"
+                            debug="false"
+                            displayName="SC-SFDC-SOAP"
+                            label=""
+                            name="SC-SFDC-SOAP-2"
+                            uuid="8e5f261c-86bd-4e6b-bc31-8eb5644f37f0">
+            <description>Salesforce  SOAP API  Connector to create, retrieve, update or delete records, such as accounts, leads, and custom objects. With more than 20 different calls, SOAP API also allows you to maintain passwords, perform searches, and much more.</description>
+            <tags>SFDC,Workday,soap</tags>
+            <connectionAttributes xmlns="http://schemas.informatica.com/appmodules/screenflow/2014/04/avosConnectors.xsd">
+               <connectionAttribute description="SFDC Integration User Credentials"
+                                    masked="false"
+                                    name="userid"
+                                    required="true"
+                                    testWith="ananyamome@informatica.com"
+                                    type="string"/>
+               <connectionAttribute description="SFDC Integration User Access Token"
+                                    masked="true"
+                                    name="passwordSecurityToken"
+                                    required="true"
+                                    testWith=""
+                                    type="string"/>
+               <connectionAttribute description="Organization ID"
+                                    masked="false"
+                                    name="organizationId"
+                                    required="false"
+                                    testWith=""
+                                    type="string"/>
+               <connectionAttribute description="Portal ID"
+                                    masked="false"
+                                    name="portalId"
+                                    required="false"
+                                    testWith=""
+                                    type="string"/>
+               <connectionAttribute description="SFDC SOAP API URL"
+                                    masked="false"
+                                    name="baseUrl"
+                                    required="true"
+                                    testWith="https://login.salesforce.com/services/Soap/c/47.0"
+                                    type="string"/>
+            </connectionAttributes>
+            <actions>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       isAbstract="true"
+                       label="BaseAction"
+                       maxRedirects="100"
+                       name="BaseAction"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <input>
+                     <parameter description="Use Server URL Returned by the Login Response"
+                                name="serverUrl"
+                                required="true"
+                                testWith="https://na17.salesforce.com/services/Soap/c/38.0/00Do0000000K6jS"
+                                type="string"/>
+                  </input>
+                  <binding>
+                     <restSimpleBinding multiUsing="semicolonSeparated" url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username>CREST_SEMPRE_API</username>
+                           <password/>
+                           <isExpressionInPassword>false</isExpressionInPassword>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="Content-Type">text/xml; charset=utf-8</header>
+                        </httpHeaders>
+                        <body/>
+                     </restSimpleBinding>
+                  </binding>
+                  <output/>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="login"
+                       maxRedirects="100"
+                       name="login"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="exclude" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <attribute inherit="overwrite" name="url" type="url"/>
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input/>
+                  <binding>
+                     <restSimpleBinding url="{$baseUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:LoginScopeHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            &lt;ns:organizationId&gt;{$organizationId}&lt;/ns:organizationId&gt;
+            &lt;ns:portalId&gt;{$portalId}&lt;/ns:portalId&gt;
+        &lt;/ns:LoginScopeHeader&gt;
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:login xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            &lt;ns:username&gt;{$userid}&lt;/ns:username&gt;
+            &lt;ns:password&gt;{$passwordSecurityToken}&lt;/ns:password&gt;
+        &lt;/ns:login&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="Login Response" name="loginResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">LoginResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='loginResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="create"
+                       maxRedirects="100"
+                       name="create"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="create"
+                                required="false"
+                                testWith="&lt;Create_AnonymousType&gt;&#xA;&#x9;&lt;sObjects&gt;&#xA;        &lt;xsiType&gt;Contact&lt;/xsiType&gt;&#xA;&#x9;    &lt;FirstName&gt;Donna F&lt;/FirstName&gt;&#xA;&#x9;&#x9;&lt;LastName&gt;Kenedy&lt;/LastName&gt;&#xA;&#x9;&#x9;&lt;AccountId&gt;0016F00003C4xliQAB&lt;/AccountId&gt;&#xA;&#x9;&#x9;&lt;MailingCountry&gt;USA&lt;/MailingCountry&gt;&#xA;&#x9;&#x9;&lt;Contact_External_ID__c&gt;x10&lt;/Contact_External_ID__c&gt;&#xA;&#x9;&lt;/sObjects&gt;&#xA;&lt;sObjects&gt;&#xA;        &lt;xsiType&gt;Contact&lt;/xsiType&gt;&#xA;&#x9;    &lt;FirstName&gt;Abraham&lt;/FirstName&gt;&#xA;&#x9;&#x9;&lt;LastName&gt;Lincon&lt;/LastName&gt;&#xA;&#x9;&#x9;&lt;AccountId&gt;0016F00003C4xliQAB&lt;/AccountId&gt;&#xA;&#x9;&#x9;&lt;MailingCountry&gt;UK&lt;/MailingCountry&gt;&#xA;&#x9;&#x9;&lt;Contact_External_ID__c&gt;1003&lt;/Contact_External_ID__c&gt;&#xA;&#x9;&lt;/sObjects&gt;&#xA;&lt;/Create_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">Create_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQMbkruWB4hfkBhIEectfOLFvVW1wpSjTbVPWlnyWKyslVruj_2kzHEieanfIk.MASJSGywXA4ssqsxDLWgnXFTqZlznN&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AssignmentRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AssignmentRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="MruHeader" required="false" testWith="" type="reference">
+                        <options>
+                           <option name="referenceTo">MruHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllowFieldTruncationHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllowFieldTruncationHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DisableFeedTrackingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DisableFeedTrackingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="StreamingEnabledHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">StreamingEnabledHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllOrNoneHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllOrNoneHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DuplicateRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DuplicateRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="LocaleOptions"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">LocaleOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DebuggingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DebuggingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="PackageVersionHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">PackageVersionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="EmailHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">EmailHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+              &lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      { if (empty($AssignmentRuleHeader)) then () else
+      &lt;ns:AssignmentRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:assignmentRuleId&gt;{$AssignmentRuleHeader/assignmentRuleId/text()}&lt;/ns:assignmentRuleId&gt;
+        &lt;ns:useDefaultRule&gt;{$AssignmentRuleHeader/useDefaultRule/text()}&lt;/ns:useDefaultRule&gt;
+      &lt;/ns:AssignmentRuleHeader&gt;
+      }
+      { if (empty($MruHeader)) then () else
+      &lt;ns:MruHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+              &lt;ns:updateMru&gt;{$MruHeader/updateMru/text()}&lt;/ns:updateMru&gt;
+      &lt;/ns:MruHeader&gt;
+      }
+      { if (empty($AllowFieldTruncationHeader)) then () else
+      &lt;ns:AllowFieldTruncationHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      &lt;ns:allowFieldTruncation&gt;{$AllowFieldTruncationHeader/allowFieldTruncation/text()}&lt;/ns:allowFieldTruncation&gt;
+      &lt;/ns:AllowFieldTruncationHeader&gt;
+      }
+      { if (empty($DisableFeedTrackingHeader)) then () else
+      &lt;ns:DisableFeedTrackingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      &lt;ns:disableFeedTracking&gt;{$DisableFeedTrackingHeader/disableFeedTracking/text()}&lt;/ns:disableFeedTracking&gt;
+      &lt;/ns:DisableFeedTrackingHeader&gt;
+      }
+      { if (empty($StreamingEnabledHeader)) then () else
+      &lt;ns:StreamingEnabledHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      &lt;ns:streamingEnabled&gt;{$StreamingEnabledHeader/streamingEnabled/text()}&lt;/ns:streamingEnabled&gt;
+      &lt;/ns:StreamingEnabledHeader&gt;
+      }
+      { if (empty($AllOrNoneHeader)) then () else
+      &lt;ns:AllOrNoneHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+              &lt;ns:allOrNone&gt;{$AllOrNoneHeader/allOrNone/text()}&lt;/ns:allOrNone&gt;
+      &lt;/ns:AllOrNoneHeader&gt;
+      }
+      { if (empty($DuplicateRuleHeader)) then () else
+      &lt;ns:DuplicateRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:allowSave&gt;{$DuplicateRuleHeader/allowSave/text()}&lt;/ns:allowSave&gt;
+        &lt;ns:includeRecordDetails&gt;{$DuplicateRuleHeader/includeRecordDetails/text()}&lt;/ns:includeRecordDetails&gt;
+        &lt;ns:runAsCurrentUser&gt;{$DuplicateRuleHeader/runAsCurrentUser/text()}&lt;/ns:runAsCurrentUser&gt;
+      &lt;/ns:DuplicateRuleHeader&gt;
+      }
+      { if (empty($LocaleOptions)) then () else
+      &lt;ns:LocaleOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:language&gt;{$LocaleOptions/language/text()}&lt;/ns:language&gt;
+        &lt;ns:localizeErrors&gt;{$LocaleOptions/localizeErrors/text()}&lt;/ns:localizeErrors&gt;
+      &lt;/ns:LocaleOptions&gt;
+      }
+      { if (empty($DebuggingHeader)) then () else
+      &lt;ns:DebuggingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+
+        {
+        for $categories in $DebuggingHeader/categories
+
+        return
+        &lt;ns:categories&gt;
+          &lt;ns:category&gt;{$categories/category/text()}&lt;/ns:category&gt;
+          &lt;ns:level&gt;{$categories/level/text()}&lt;/ns:level&gt;
+        &lt;/ns:categories&gt;
+
+        }
+        &lt;ns:debugLevel&gt;{$DebuggingHeader/debugLevel/text()}&lt;/ns:debugLevel&gt;
+      &lt;/ns:DebuggingHeader&gt;
+      }
+      { if (empty($PackageVersionHeader)) then () else
+      &lt;ns:PackageVersionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+
+        {
+        for $packageVersions in $PackageVersionHeader/packageVersions
+
+        return
+        &lt;ns:packageVersions&gt;
+          &lt;ns:majorNumber&gt;{$packageVersions/majorNumber/text()}&lt;/ns:majorNumber&gt;
+          &lt;ns:minorNumber&gt;{$packageVersions/minorNumber/text()}&lt;/ns:minorNumber&gt;
+          &lt;ns:namespace&gt;{$packageVersions/namespace/text()}&lt;/ns:namespace&gt;
+        &lt;/ns:packageVersions&gt;
+
+        }
+      &lt;/ns:PackageVersionHeader&gt;
+      }
+      { if (empty($EmailHeader)) then () else
+      &lt;ns:EmailHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:triggerAutoResponseEmail&gt;{$EmailHeader/triggerAutoResponseEmail/text()}&lt;/ns:triggerAutoResponseEmail&gt;
+        &lt;ns:triggerOtherEmail&gt;{$EmailHeader/triggerOtherEmail/text()}&lt;/ns:triggerOtherEmail&gt;
+        &lt;ns:triggerUserEmail&gt;{$EmailHeader/triggerUserEmail/text()}&lt;/ns:triggerUserEmail&gt;
+      &lt;/ns:EmailHeader&gt;
+      }
+     
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:create xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            {
+                for $sObjects in $create/sObjects
+                return
+                &lt;ns:sObjects  xsi:type="{concat('sf:',$sObjects/xsiType/text())}"&gt;
+                    {
+                        for $fieldsToNull in $sObjects/fieldsToNull
+                        return
+                        &lt;ns1:fieldsToNull xmlns:ns1="urn:sobject.enterprise.soap.sforce.com"&gt;{$fieldsToNull/text()}&lt;/ns1:fieldsToNull&gt;
+                    }
+
+                    {
+                      for $element in $sObjects/*
+                      where 
+                        not(matches(local-name($element),"fieldsToNull|xsiType"))
+                      return $element
+                    }
+                &lt;/ns:sObjects&gt;
+            }
+
+        &lt;/ns:create&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="createResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">CreateResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='createResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="update"
+                       maxRedirects="100"
+                       name="update"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <attribute inherit="overwrite" name="url" type="url"/>
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="update"
+                                required="false"
+                                testWith="&lt;Update_AnonymousType&gt;&#xA;&#x9;&lt;sObjects&gt;&#xA;                &lt;xsiType&gt;Account&lt;/xsiType&gt;&#xA;&#x9;&#x9;&lt;Id&gt;0016F00002R2wAL&lt;/Id&gt;&#xA;&#x9;&#x9;&lt;Name&gt;TestFinisar1&lt;/Name&gt;&#x9;&#xA;&#x9;        &lt;Site&gt;http://www.testkarthik.com&lt;/Site&gt;&#xA;&#x9;&lt;/sObjects&gt;&#xA;&lt;sObjects&gt;&#xA;                &lt;xsiType&gt;Account&lt;/xsiType&gt;&#xA;&#x9;&#x9;&lt;Id&gt;0016F00002R2wAK&lt;/Id&gt;&#xA;&#x9;&#x9;&lt;Name&gt;TestFinisar2&lt;/Name&gt;&#x9;&#xA;&#x9;        &lt;Site&gt;http://www.testkarthik2.com&lt;/Site&gt;&#xA;&#x9;&lt;/sObjects&gt;&#xA;&lt;/Update_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">Update_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQB0ISQXnW8Yj8rEkdQMuR93Cdgq3beGMZWpLFGhCOIE3DCrCkjQWS.6r_pw00HU1tcEWJl9V1cnpQjrr8LJi4ZrUHXH1&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AssignmentRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AssignmentRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="MruHeader" required="false" testWith="" type="reference">
+                        <options>
+                           <option name="referenceTo">MruHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllowFieldTruncationHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllowFieldTruncationHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DisableFeedTrackingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DisableFeedTrackingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="StreamingEnabledHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">StreamingEnabledHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllOrNoneHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllOrNoneHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DuplicateRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DuplicateRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="LocaleOptions"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">LocaleOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DebuggingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DebuggingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="PackageVersionHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">PackageVersionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="EmailHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">EmailHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="OwnerChangeOptions"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">OwnerChangeOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      { if (empty($AssignmentRuleHeader)) then () else
+      &lt;ns:AssignmentRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:assignmentRuleId&gt;{$AssignmentRuleHeader/assignmentRuleId/text()}&lt;/ns:assignmentRuleId&gt;
+        &lt;ns:useDefaultRule&gt;{$AssignmentRuleHeader/useDefaultRule/text()}&lt;/ns:useDefaultRule&gt;
+      &lt;/ns:AssignmentRuleHeader&gt;
+      }
+      { if (empty($MruHeader)) then () else
+      &lt;ns:MruHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:updateMru&gt;{$MruHeader/updateMru/text()}&lt;/ns:updateMru&gt;
+      &lt;/ns:MruHeader&gt;
+      }
+      { if (empty($AllowFieldTruncationHeader)) then () else
+      &lt;ns:AllowFieldTruncationHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:allowFieldTruncation&gt;{$AllowFieldTruncationHeader/allowFieldTruncation/text()}&lt;/ns:allowFieldTruncation&gt;
+      &lt;/ns:AllowFieldTruncationHeader&gt;
+      }
+      { if (empty($DisableFeedTrackingHeader)) then () else
+      &lt;ns:DisableFeedTrackingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:disableFeedTracking&gt;{$DisableFeedTrackingHeader/disableFeedTracking/text()}&lt;/ns:disableFeedTracking&gt;
+      &lt;/ns:DisableFeedTrackingHeader&gt;
+      }
+      { if (empty($StreamingEnabledHeader)) then () else
+      &lt;ns:StreamingEnabledHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:streamingEnabled&gt;{$StreamingEnabledHeader/streamingEnabled/text()}&lt;/ns:streamingEnabled&gt;
+      &lt;/ns:StreamingEnabledHeader&gt;
+      }
+      { if (empty($AllOrNoneHeader)) then () else
+      &lt;ns:AllOrNoneHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:allOrNone&gt;{$AllOrNoneHeader/allOrNone/text()}&lt;/ns:allOrNone&gt;
+      &lt;/ns:AllOrNoneHeader&gt;
+      }
+      { if (empty($DuplicateRuleHeader)) then () else
+      &lt;ns:DuplicateRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:allowSave&gt;{$DuplicateRuleHeader/allowSave/text()}&lt;/ns:allowSave&gt;
+        &lt;ns:includeRecordDetails&gt;{$DuplicateRuleHeader/includeRecordDetails/text()}&lt;/ns:includeRecordDetails&gt;
+        &lt;ns:runAsCurrentUser&gt;{$DuplicateRuleHeader/runAsCurrentUser/text()}&lt;/ns:runAsCurrentUser&gt;
+      &lt;/ns:DuplicateRuleHeader&gt;
+      }
+      { if (empty($LocaleOptions)) then () else
+      &lt;ns:LocaleOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:language&gt;{$LocaleOptions/language/text()}&lt;/ns:language&gt;
+        &lt;ns:localizeErrors&gt;{$LocaleOptions/localizeErrors/text()}&lt;/ns:localizeErrors&gt;
+      &lt;/ns:LocaleOptions&gt;
+      }
+      { if (empty($DebuggingHeader)) then () else
+      &lt;ns:DebuggingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        {
+        for $categories in $DebuggingHeader/categories
+        return
+        &lt;ns:categories&gt;
+          &lt;ns:category&gt;{$categories/category/text()}&lt;/ns:category&gt;
+          &lt;ns:level&gt;{$categories/level/text()}&lt;/ns:level&gt;
+        &lt;/ns:categories&gt;
+        }
+        &lt;ns:debugLevel&gt;{$DebuggingHeader/debugLevel/text()}&lt;/ns:debugLevel&gt;
+      &lt;/ns:DebuggingHeader&gt;
+      }
+      { if (empty($PackageVersionHeader)) then () else
+      &lt;ns:PackageVersionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        {
+        for $packageVersions in $PackageVersionHeader/packageVersions
+        return
+        &lt;ns:packageVersions&gt;
+          &lt;ns:majorNumber&gt;{$packageVersions/majorNumber/text()}&lt;/ns:majorNumber&gt;
+          &lt;ns:minorNumber&gt;{$packageVersions/minorNumber/text()}&lt;/ns:minorNumber&gt;
+          &lt;ns:namespace&gt;{$packageVersions/namespace/text()}&lt;/ns:namespace&gt;
+        &lt;/ns:packageVersions&gt;
+        }
+      &lt;/ns:PackageVersionHeader&gt;
+      }
+      { if (empty($EmailHeader)) then () else
+      &lt;ns:EmailHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:triggerAutoResponseEmail&gt;{$EmailHeader/triggerAutoResponseEmail/text()}&lt;/ns:triggerAutoResponseEmail&gt;
+        &lt;ns:triggerOtherEmail&gt;{$EmailHeader/triggerOtherEmail/text()}&lt;/ns:triggerOtherEmail&gt;
+        &lt;ns:triggerUserEmail&gt;{$EmailHeader/triggerUserEmail/text()}&lt;/ns:triggerUserEmail&gt;
+      &lt;/ns:EmailHeader&gt;
+      }
+      { if (empty($OwnerChangeOptions)) then () else
+      &lt;ns:OwnerChangeOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	{
+        for $options in $OwnerChangeOptions/options
+        return
+        &lt;ns:options&gt;
+        	&lt;ns:type&gt;{$options/type/text()}&lt;/ns:type&gt;
+        	&lt;ns:execute&gt;{$options/execute/text()}&lt;/ns:execute&gt;
+        &lt;/ns:options&gt;
+        }
+      &lt;/ns:OwnerChangeOptions&gt;
+      }
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:update xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            {
+                for $sObjects in $update/sObjects
+                return
+                &lt;ns:sObjects  xsi:type="{concat('sf:',$sObjects/xsiType/text())}"&gt;
+                    {
+                        for $fieldsToNull in $sObjects/fieldsToNull
+                        return
+                        &lt;ns1:fieldsToNull xmlns:ns1="urn:sobject.enterprise.soap.sforce.com"&gt;{$fieldsToNull/text()}&lt;/ns1:fieldsToNull&gt;
+                    }
+                    {
+                      for $element in $sObjects/*
+                      where 
+                        not(matches(local-name($element),"fieldsToNull|xsiType"))
+                      return $element
+                    }
+                &lt;/ns:sObjects&gt;
+            }
+        &lt;/ns:update&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="updateResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">UpdateResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='updateResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="logout"
+                       maxRedirects="100"
+                       name="logout"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="logout" required="false" testWith="" type="reference">
+                        <options>
+                           <option name="referenceTo">Logout_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00Do0000000K6jS!AQUAQMWrTZd.4E6EgMctxyzjcVzfA9TklG99d85wk1Q4BrtXmjJ2QpGHxtH5m6mW0Z6slL..vJfUNZrZxlPsgA8Yrs6WA38b&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            &lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+        &lt;/ns:SessionHeader&gt;
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:logout xmlns:ns="urn:enterprise.soap.sforce.com"/&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="logoutResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">LogoutResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='logoutResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="query"
+                       maxRedirects="100"
+                       name="query"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <attribute inherit="inherit" name="url" type="url"/>
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="query"
+                                required="false"
+                                testWith="&lt;Query_AnonymousType&gt;&#xA;   &lt;queryString&gt;&#xA;SELECT &#xA;   ID, Name ,accountid&#xA;   FROM &#xA;   contact where accountid='0016F00002R2wAL'&#xA;&lt;/queryString&gt;&#xA;&lt;/Query_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">Query_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQG0mM20.OkUDYI7NBfI.FDfqhCQ5SuwnVux2RA3sULxljLrNBpttqdjuP99tPjmNj0b4eygkuMSgh4nInYSb4DF7IMhR&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="QueryOptions"
+                                required="false"
+                                testWith="&lt;QueryOptions_AnonymousType&gt;&#xA;   &lt;batchSize&gt;200&lt;/batchSize&gt;&#xA;&lt;/QueryOptions_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">QueryOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="MruHeader" required="false" testWith="" type="reference">
+                        <options>
+                           <option name="referenceTo">MruHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="PackageVersionHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">PackageVersionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+	&lt;soap:Header&gt;
+		&lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+			&lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+		&lt;/ns:SessionHeader&gt;
+        { if (empty($QueryOptions)) then () else
+		&lt;ns:QueryOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+			&lt;ns:batchSize&gt;{$QueryOptions/batchSize/text()}&lt;/ns:batchSize&gt;
+		&lt;/ns:QueryOptions&gt;
+        }
+	&lt;/soap:Header&gt;
+	&lt;soap:Body&gt;
+		&lt;ns:query xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+			&lt;ns:queryString&gt;{$query/queryString/text()}&lt;/ns:queryString&gt;
+		&lt;/ns:query&gt;
+	&lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="queryResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">QueryResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='queryResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="queryAll"
+                       maxRedirects="100"
+                       name="queryAll"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="queryAll"
+                                required="false"
+                                testWith="&lt;QueryAll_AnonymousType&gt;&#xA;   &lt;queryString&gt;&#xA;SELECT Id, isDeleted, Name from Account where isDeleted = true&#xA;&lt;/queryString&gt;&#xA;&lt;/QueryAll_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">QueryAll_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQHmHoFKjkmbUeIBcYYWq.7tQHy_dCMrOPvLFOljJZNjdIJ7sx0wdn1KGN1lGB_dI3iZr6mJoZbP1N8P4RDHaVV6ESCMl&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="QueryOptions"
+                                required="false"
+                                testWith="&lt;QueryOptions_AnonymousType&gt;&#xA;   &lt;batchSize&gt;200&lt;/batchSize&gt;&#xA;&lt;/QueryOptions_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">QueryOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+         &lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      { if (empty($QueryOptions)) then () else
+      &lt;ns:QueryOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+         &lt;ns:batchSize&gt;{$QueryOptions/batchSize/text()}&lt;/ns:batchSize&gt;
+      &lt;/ns:QueryOptions&gt;
+      }
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:queryAll xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            &lt;ns:queryString&gt;{$queryAll/queryString/text()}&lt;/ns:queryString&gt;
+        &lt;/ns:queryAll&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="queryAllResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">QueryAllResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='queryAllResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="queryMore"
+                       maxRedirects="100"
+                       name="queryMore"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="queryMore"
+                                required="false"
+                                testWith="&lt;QueryMore_AnonymousType&gt;&#xA;   &lt;queryLocator&gt;&#xA;4028e69923eaaa2a0124069b5c887849-200&#xA;&lt;/queryLocator&gt;&#xA;&lt;/QueryMore_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">QueryMore_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQHmHoFKjkmbUeIBcYYWq.7tQHy_dCMrOPvLFOljJZNjdIJ7sx0wdn1KGN1lGB_dI3iZr6mJoZbP1N8P4RDHaVV6ESCMl&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="QueryOptions"
+                                required="false"
+                                testWith="&lt;QueryOptions_AnonymousType&gt;&#xA;   &lt;batchSize&gt;200&lt;/batchSize&gt;&#xA;&lt;/QueryOptions_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">QueryOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+         &lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      { if (empty($QueryOptions)) then () else
+      &lt;ns:QueryOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+         &lt;ns:batchSize&gt;{$QueryOptions/batchSize/text()}&lt;/ns:batchSize&gt;
+      &lt;/ns:QueryOptions&gt;
+      }
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:queryMore xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            &lt;ns:queryLocator&gt;{$queryMore/queryLocator/text()}&lt;/ns:queryLocator&gt;
+      &lt;/ns:queryMore&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="queryMoreResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">QueryMoreResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='queryMoreResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="search"
+                       maxRedirects="100"
+                       name="search"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="search"
+                                required="false"
+                                testWith="&lt;Search_AnonymousType&gt;&#xA;   &lt;searchString&gt;Find {HR*}&lt;/searchString&gt;&#xA;&lt;/Search_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">Search_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQHmHoFKjkmbUeIBcYYWq.7tQHy_dCMrOPvLFOljJZNjdIJ7sx0wdn1KGN1lGB_dI3iZr6mJoZbP1N8P4RDHaVV6ESCMl&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="PackageVersionHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">PackageVersionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      {  if (empty($PackageVersionHeader)) then () else
+      &lt;ns:PackageVersionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        {
+          for $packageVersions in $PackageVersionHeader/packageVersions
+          return
+          &lt;ns:packageVersions&gt;
+            &lt;ns:majorNumber&gt;{$packageVersions/majorNumber/text()}&lt;/ns:majorNumber&gt;
+            &lt;ns:minorNumber&gt;{$packageVersions/minorNumber/text()}&lt;/ns:minorNumber&gt;
+            &lt;ns:namespace&gt;{$packageVersions/namespace/text()}&lt;/ns:namespace&gt;
+          &lt;/ns:packageVersions&gt;
+        }
+      &lt;/ns:PackageVersionHeader&gt;
+      }
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:search xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+          &lt;ns:searchString&gt;{$search/searchString/text()}&lt;/ns:searchString&gt;
+      &lt;/ns:search&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="searchResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">SearchResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='searchResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="delete"
+                       maxRedirects="100"
+                       name="delete"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="content" type="content"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="delete"
+                                required="false"
+                                testWith="&lt;Delete_AnonymousType&gt;&#xA;&#x9;&lt;ids&gt;0016F000036M7gI&lt;/ids&gt;&#xA;&#x9;&lt;ids&gt;0016F000036M7gJ&lt;/ids&gt;   &#x9;&#xA;&lt;/Delete_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">Delete_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQB0ISQXnW8Yj8rEkdQMuR93Cdgq3beGMZWpLFGhCOIE3DCrCkjQWS.6r_pw00HU1tcEWJl9V1cnpQjrr8LJi4ZrUHXH1&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AssignmentRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AssignmentRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="MruHeader" required="false" testWith="" type="reference">
+                        <options>
+                           <option name="referenceTo">MruHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllowFieldTruncationHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AssignmentRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DisableFeedTrackingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DisableFeedTrackingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="StreamingEnabledHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">StreamingEnabledHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllOrNoneHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllOrNoneHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DuplicateRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DuplicateRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="LocaleOptions"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">LocaleOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DebuggingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DebuggingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="PackageVersionHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">PackageVersionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="EmailHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">EmailHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+              &lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      { if (empty($AssignmentRuleHeader)) then () else
+      &lt;ns:AssignmentRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:assignmentRuleId&gt;{$AssignmentRuleHeader/assignmentRuleId/text()}&lt;/ns:assignmentRuleId&gt;
+        &lt;ns:useDefaultRule&gt;{$AssignmentRuleHeader/useDefaultRule/text()}&lt;/ns:useDefaultRule&gt;
+      &lt;/ns:AssignmentRuleHeader&gt;
+      }
+      { if (empty($MruHeader)) then () else
+      &lt;ns:MruHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+              &lt;ns:updateMru&gt;{$MruHeader/updateMru/text()}&lt;/ns:updateMru&gt;
+      &lt;/ns:MruHeader&gt;
+      }
+      { if (empty($AllowFieldTruncationHeader)) then () else
+      &lt;ns:AllowFieldTruncationHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      &lt;ns:allowFieldTruncation&gt;{$AllowFieldTruncationHeader/allowFieldTruncation/text()}&lt;/ns:allowFieldTruncation&gt;
+      &lt;/ns:AllowFieldTruncationHeader&gt;
+      }
+      { if (empty($DisableFeedTrackingHeader)) then () else
+      &lt;ns:DisableFeedTrackingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      &lt;ns:disableFeedTracking&gt;{$DisableFeedTrackingHeader/disableFeedTracking/text()}&lt;/ns:disableFeedTracking&gt;
+      &lt;/ns:DisableFeedTrackingHeader&gt;
+      }
+      { if (empty($StreamingEnabledHeader)) then () else
+      &lt;ns:StreamingEnabledHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      &lt;ns:streamingEnabled&gt;{$StreamingEnabledHeader/streamingEnabled/text()}&lt;/ns:streamingEnabled&gt;
+      &lt;/ns:StreamingEnabledHeader&gt;
+      }
+      { if (empty($AllOrNoneHeader)) then () else
+      &lt;ns:AllOrNoneHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+              &lt;ns:allOrNone&gt;{$AllOrNoneHeader/allOrNone/text()}&lt;/ns:allOrNone&gt;
+      &lt;/ns:AllOrNoneHeader&gt;
+      }
+      { if (empty($DuplicateRuleHeader)) then () else
+      &lt;ns:DuplicateRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:allowSave&gt;{$DuplicateRuleHeader/allowSave/text()}&lt;/ns:allowSave&gt;
+        &lt;ns:includeRecordDetails&gt;{$DuplicateRuleHeader/includeRecordDetails/text()}&lt;/ns:includeRecordDetails&gt;
+        &lt;ns:runAsCurrentUser&gt;{$DuplicateRuleHeader/runAsCurrentUser/text()}&lt;/ns:runAsCurrentUser&gt;
+      &lt;/ns:DuplicateRuleHeader&gt;
+      }
+      { if (empty($LocaleOptions)) then () else
+      &lt;ns:LocaleOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:language&gt;{$LocaleOptions/language/text()}&lt;/ns:language&gt;
+        &lt;ns:localizeErrors&gt;{$LocaleOptions/localizeErrors/text()}&lt;/ns:localizeErrors&gt;
+      &lt;/ns:LocaleOptions&gt;
+      }
+      { if (empty($DebuggingHeader)) then () else
+      &lt;ns:DebuggingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+
+        {
+        for $categories in $DebuggingHeader/categories
+
+        return
+        &lt;ns:categories&gt;
+          &lt;ns:category&gt;{$categories/category/text()}&lt;/ns:category&gt;
+          &lt;ns:level&gt;{$categories/level/text()}&lt;/ns:level&gt;
+        &lt;/ns:categories&gt;
+
+        }
+        &lt;ns:debugLevel&gt;{$DebuggingHeader/debugLevel/text()}&lt;/ns:debugLevel&gt;
+      &lt;/ns:DebuggingHeader&gt;
+      }
+      { if (empty($PackageVersionHeader)) then () else
+      &lt;ns:PackageVersionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+
+        {
+        for $packageVersions in $PackageVersionHeader/packageVersions
+
+        return
+        &lt;ns:packageVersions&gt;
+          &lt;ns:majorNumber&gt;{$packageVersions/majorNumber/text()}&lt;/ns:majorNumber&gt;
+          &lt;ns:minorNumber&gt;{$packageVersions/minorNumber/text()}&lt;/ns:minorNumber&gt;
+          &lt;ns:namespace&gt;{$packageVersions/namespace/text()}&lt;/ns:namespace&gt;
+        &lt;/ns:packageVersions&gt;
+
+        }
+      &lt;/ns:PackageVersionHeader&gt;
+      }
+      { if (empty($EmailHeader)) then () else
+      &lt;ns:EmailHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:triggerAutoResponseEmail&gt;{$EmailHeader/triggerAutoResponseEmail/text()}&lt;/ns:triggerAutoResponseEmail&gt;
+        &lt;ns:triggerOtherEmail&gt;{$EmailHeader/triggerOtherEmail/text()}&lt;/ns:triggerOtherEmail&gt;
+        &lt;ns:triggerUserEmail&gt;{$EmailHeader/triggerUserEmail/text()}&lt;/ns:triggerUserEmail&gt;
+      &lt;/ns:EmailHeader&gt;
+      }
+     
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;
+      &lt;ns:delete xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+            {
+                for $ids in $delete/ids
+                return
+                &lt;ns:ids&gt;{$ids/text()}&lt;/ns:ids&gt;           
+            }
+
+        &lt;/ns:delete&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="deleteResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">DeleteResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='deleteResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+               <action category=""
+                       failOnError="true"
+                       forSearch="false"
+                       inherits="BaseAction"
+                       label="upsert"
+                       maxRedirects="100"
+                       name="upsert"
+                       preemptiveAuth="true"
+                       responseEncoding="">
+                  <description/>
+                  <inheritanceMetadata>
+                     <section type="input">
+                        <section type="inputParameters">
+                           <attribute inherit="inherit" name="serverUrl" type="parameter"/>
+                        </section>
+                     </section>
+                     <section type="output">
+                        <section type="outputFields"/>
+                     </section>
+                     <section type="restSimpleBinding">
+                        <section type="body">
+                           <attribute inherit="overwrite" name="generateUsing" type="generateUsing"/>
+                        </section>
+                        <section type="httpHeaders">
+                           <attribute inherit="inherit" name="Content-Type" type="header"/>
+                        </section>
+                        <section type="otherParams"/>
+                     </section>
+                  </inheritanceMetadata>
+                  <input>
+                     <parameter name="upsert"
+                                required="false"
+                                testWith="&lt;Upsert_AnonymousType&gt;&#xA;&lt;externalIDFieldName&gt;Contact_External_ID__c&lt;/externalIDFieldName&gt;&#xA;&#x9;&lt;sObjects&gt;&#xA;        &lt;xsiType&gt;Contact&lt;/xsiType&gt;&#xA;&#x9;&#x9;&lt;Id&gt;0036F00003Mo3reQAB&lt;/Id&gt;&#xA;&#x9;&#x9;&lt;FirstName&gt;Test Record 1-testing again&lt;/FirstName&gt;&#xA;&#x9;&#x9;&lt;LastName&gt;Test&lt;/LastName&gt;&#xA;&#x9;&#x9;&lt;AccountId&gt;0016F00003VoK60QAF&lt;/AccountId&gt;&#xA;&#x9;&#x9;&lt;MailingCountry&gt;UK&lt;/MailingCountry&gt;&#xA;&#x9;&#x9;&lt;Contact_External_ID__c&gt;101&lt;/Contact_External_ID__c&gt;&#xA;&#x9;&lt;/sObjects&gt;&#xA;&lt;/Upsert_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">Upsert_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="SessionHeader"
+                                required="false"
+                                testWith="&lt;SessionHeader_AnonymousType&gt;&#xA;   &lt;sessionId&gt;00D6F000001pOGM!ARQAQMbkruWB4hfkBhIEectfOLFvVW1wpSjTbVPWlnyWKyslVruj_2kzHEieanfIk.MASJSGywXA4ssqsxDLWgnXFTqZlznN&lt;/sessionId&gt;&#xA;&lt;/SessionHeader_AnonymousType&gt;"
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">SessionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="MruHeader" required="false" testWith="" type="reference">
+                        <options>
+                           <option name="referenceTo">MruHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllowFieldTruncationHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllowFieldTruncationHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DisableFeedTrackingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DisableFeedTrackingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="StreamingEnabledHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">StreamingEnabledHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AllOrNoneHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AllOrNoneHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DuplicateRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DuplicateRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="LocaleOptions"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">LocaleOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="DebuggingHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">DebuggingHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="PackageVersionHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">PackageVersionHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="EmailHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">EmailHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="OwnerChangeOptions"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">OwnerChangeOptions_AnonymousType</option>
+                        </options>
+                     </parameter>
+                     <parameter name="AssignmentRuleHeader"
+                                required="false"
+                                testWith=""
+                                type="reference">
+                        <options>
+                           <option name="referenceTo">AssignmentRuleHeader_AnonymousType</option>
+                        </options>
+                     </parameter>
+                  </input>
+                  <binding>
+                     <restSimpleBinding url="{$serverUrl}" verb="POST">
+                        <authentication>
+                           <username/>
+                           <password/>
+                           <isExpressionInPassword/>
+                        </authentication>
+                        <httpHeaders>
+                           <header name="SOAPAction">""</header>
+                        </httpHeaders>
+                        <body>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Header&gt;
+      &lt;ns:SessionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:sessionId&gt;{$SessionHeader/sessionId/text()}&lt;/ns:sessionId&gt;
+      &lt;/ns:SessionHeader&gt;
+      { if (empty($AssignmentRuleHeader)) then () else
+      &lt;ns:AssignmentRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:assignmentRuleId&gt;{$AssignmentRuleHeader/assignmentRuleId/text()}&lt;/ns:assignmentRuleId&gt;
+        &lt;ns:useDefaultRule&gt;{$AssignmentRuleHeader/useDefaultRule/text()}&lt;/ns:useDefaultRule&gt;
+      &lt;/ns:AssignmentRuleHeader&gt;
+      }
+      { if (empty($MruHeader)) then () else
+      &lt;ns:MruHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:updateMru&gt;{$MruHeader/updateMru/text()}&lt;/ns:updateMru&gt;
+      &lt;/ns:MruHeader&gt;
+      }
+      { if (empty($AllowFieldTruncationHeader)) then () else
+      &lt;ns:AllowFieldTruncationHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:allowFieldTruncation&gt;{$AllowFieldTruncationHeader/allowFieldTruncation/text()}&lt;/ns:allowFieldTruncation&gt;
+      &lt;/ns:AllowFieldTruncationHeader&gt;
+      }
+      { if (empty($DisableFeedTrackingHeader)) then () else
+      &lt;ns:DisableFeedTrackingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:disableFeedTracking&gt;{$DisableFeedTrackingHeader/disableFeedTracking/text()}&lt;/ns:disableFeedTracking&gt;
+      &lt;/ns:DisableFeedTrackingHeader&gt;
+      }
+      { if (empty($StreamingEnabledHeader)) then () else
+      &lt;ns:StreamingEnabledHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:streamingEnabled&gt;{$StreamingEnabledHeader/streamingEnabled/text()}&lt;/ns:streamingEnabled&gt;
+      &lt;/ns:StreamingEnabledHeader&gt;
+      }
+      { if (empty($AllOrNoneHeader)) then () else
+      &lt;ns:AllOrNoneHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	&lt;ns:allOrNone&gt;{$AllOrNoneHeader/allOrNone/text()}&lt;/ns:allOrNone&gt;
+      &lt;/ns:AllOrNoneHeader&gt;
+      }
+      { if (empty($DuplicateRuleHeader)) then () else
+      &lt;ns:DuplicateRuleHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:allowSave&gt;{$DuplicateRuleHeader/allowSave/text()}&lt;/ns:allowSave&gt;
+        &lt;ns:includeRecordDetails&gt;{$DuplicateRuleHeader/includeRecordDetails/text()}&lt;/ns:includeRecordDetails&gt;
+        &lt;ns:runAsCurrentUser&gt;{$DuplicateRuleHeader/runAsCurrentUser/text()}&lt;/ns:runAsCurrentUser&gt;
+      &lt;/ns:DuplicateRuleHeader&gt;
+      }
+      { if (empty($LocaleOptions)) then () else
+      &lt;ns:LocaleOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:language&gt;{$LocaleOptions/language/text()}&lt;/ns:language&gt;
+        &lt;ns:localizeErrors&gt;{$LocaleOptions/localizeErrors/text()}&lt;/ns:localizeErrors&gt;
+      &lt;/ns:LocaleOptions&gt;
+      }
+      { if (empty($DebuggingHeader)) then () else
+      &lt;ns:DebuggingHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        {
+        for $categories in $DebuggingHeader/categories
+        return
+        &lt;ns:categories&gt;
+          &lt;ns:category&gt;{$categories/category/text()}&lt;/ns:category&gt;
+          &lt;ns:level&gt;{$categories/level/text()}&lt;/ns:level&gt;
+        &lt;/ns:categories&gt;
+        }
+        &lt;ns:debugLevel&gt;{$DebuggingHeader/debugLevel/text()}&lt;/ns:debugLevel&gt;
+      &lt;/ns:DebuggingHeader&gt;
+      }
+      { if (empty($PackageVersionHeader)) then () else
+      &lt;ns:PackageVersionHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        {
+        for $packageVersions in $PackageVersionHeader/packageVersions
+        return
+        &lt;ns:packageVersions&gt;
+          &lt;ns:majorNumber&gt;{$packageVersions/majorNumber/text()}&lt;/ns:majorNumber&gt;
+          &lt;ns:minorNumber&gt;{$packageVersions/minorNumber/text()}&lt;/ns:minorNumber&gt;
+          &lt;ns:namespace&gt;{$packageVersions/namespace/text()}&lt;/ns:namespace&gt;
+        &lt;/ns:packageVersions&gt;
+        }
+      &lt;/ns:PackageVersionHeader&gt;
+      }
+      { if (empty($EmailHeader)) then () else
+      &lt;ns:EmailHeader xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+        &lt;ns:triggerAutoResponseEmail&gt;{$EmailHeader/triggerAutoResponseEmail/text()}&lt;/ns:triggerAutoResponseEmail&gt;
+        &lt;ns:triggerOtherEmail&gt;{$EmailHeader/triggerOtherEmail/text()}&lt;/ns:triggerOtherEmail&gt;
+        &lt;ns:triggerUserEmail&gt;{$EmailHeader/triggerUserEmail/text()}&lt;/ns:triggerUserEmail&gt;
+      &lt;/ns:EmailHeader&gt;
+      }
+      { if (empty($OwnerChangeOptions)) then () else
+      &lt;ns:OwnerChangeOptions xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+      	{
+        for $options in $OwnerChangeOptions/options
+        return
+        &lt;ns:options&gt;
+        	&lt;ns:type&gt;{$options/type/text()}&lt;/ns:type&gt;
+        	&lt;ns:execute&gt;{$options/execute/text()}&lt;/ns:execute&gt;
+        &lt;/ns:options&gt;
+        }
+      &lt;/ns:OwnerChangeOptions&gt;
+      }
+   &lt;/soap:Header&gt;
+   &lt;soap:Body&gt;  
+      &lt;ns:upsert xmlns:ns="urn:enterprise.soap.sforce.com"&gt;
+	  	 &lt;ns:externalIDFieldName&gt;{$upsert/externalIDFieldName/text()}&lt;/ns:externalIDFieldName&gt;
+		            {
+                for $sObjects in $upsert/sObjects
+                return
+                &lt;ns:sObjects  xsi:type="{concat('sf:',$sObjects/xsiType/text())}"&gt;
+                    {
+                        for $fieldsToNull in $sObjects/fieldsToNull
+                        return
+                        &lt;ns1:fieldsToNull xmlns:ns1="urn:sobject.enterprise.soap.sforce.com"&gt;{$fieldsToNull/text()}&lt;/ns1:fieldsToNull&gt;
+                    }
+                    {
+                      for $element in $sObjects/*
+                      where 
+                        not(matches(local-name($element),"fieldsToNull|xsiType"))
+                      return $element
+                    }
+                &lt;/ns:sObjects&gt;
+            }
+        &lt;/ns:upsert&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</body>
+                     </restSimpleBinding>
+                  </binding>
+                  <output>
+                     <field description="" name="upsertResponse" type="reference">
+                        <options>
+                           <option name="referenceTo">UpsertResponse_AnonymousType</option>
+                        </options>
+                        <xquery>{util:simplifyXml(//*[local-name()='upsertResponse'])}</xquery>
+                     </field>
+                  </output>
+               </action>
+            </actions>
+            <objects>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="AllOrNoneHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="allOrNone" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="AllowFieldTruncationHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="allowFieldTruncation" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="AssignmentRuleHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="assignmentRuleId" type="string"/>
+                     <field name="useDefaultRule" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="ConvertLeadResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">LeadConvertResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="ConvertLead_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="leadConverts" type="objectlist">
+                        <options>
+                           <option name="referenceTo">LeadConvert</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="CreateResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">SaveResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Create_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="sObjects" type="objectlist">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="DebuggingHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="debugLevel" type="string"/>
+                     <field name="categories" type="objectlist">
+                        <options>
+                           <option name="referenceTo">LogInfo</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="DeleteResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">DeleteResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="DeleteResult">
+                  <description/>
+                  <detail>
+                     <field name="id" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Delete_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="ids" type="objectlist"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="DeletedRecord">
+                  <description/>
+                  <detail>
+                     <field name="deletedDate" type="datetime"/>
+                     <field name="id" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="DisableFeedTrackingHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="disableFeedTracking" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="DuplicateRuleHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="allowSave" type="checkbox"/>
+                     <field name="includeRecordDetails" type="checkbox"/>
+                     <field name="runAsCurrentUser" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="EmailHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="triggerAutoResponseEmail" type="checkbox"/>
+                     <field name="triggerOtherEmail" type="checkbox"/>
+                     <field name="triggerUserEmail" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="EmptyRecycleBinResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">EmptyRecycleBinResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="EmptyRecycleBinResult">
+                  <description/>
+                  <detail>
+                     <field name="id" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="EmptyRecycleBin_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="ids" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Error">
+                  <description/>
+                  <detail>
+                     <field name="fields" type="string"/>
+                     <field name="message" type="string"/>
+                     <field name="statusCode" type="string"/>
+                     <field name="extendedErrorDetails" type="objectlist">
+                        <options>
+                           <option name="referenceTo">ExtendedErrorDetails</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="ExtendedErrorDetails">
+                  <description/>
+                  <detail>
+                     <field name="extendedErrorCode" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetDeletedResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">GetDeletedResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetDeletedResult">
+                  <description/>
+                  <detail>
+                     <field name="earliestDateAvailable" type="datetime"/>
+                     <field name="latestDateCovered" type="datetime"/>
+                     <field name="deletedRecords" type="objectlist">
+                        <options>
+                           <option name="referenceTo">DeletedRecord</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetDeleted_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="sObjectType" type="string"/>
+                     <field name="startDate" type="datetime"/>
+                     <field name="endDate" type="datetime"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetServerTimestampResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">GetServerTimestampResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetServerTimestampResult">
+                  <description/>
+                  <detail>
+                     <field name="timestamp" type="datetime"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetServerTimestamp_AnonymousType">
+                  <description/>
+                  <detail/>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetUpdatedResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">GetUpdatedResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetUpdatedResult">
+                  <description/>
+                  <detail>
+                     <field name="ids" type="objectlist"/>
+                     <field name="latestDateCovered" type="datetime"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetUpdated_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="sObjectType" type="string"/>
+                     <field name="startDate" type="datetime"/>
+                     <field name="endDate" type="datetime"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetUserInfoResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">GetUserInfoResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetUserInfoResult">
+                  <description/>
+                  <detail>
+                     <field name="accessibilityMode" type="checkbox"/>
+                     <field name="currencySymbol" type="string"/>
+                     <field name="orgAttachmentFileSizeLimit" type="double"/>
+                     <field name="orgDefaultCurrencyIsoCode" type="string"/>
+                     <field name="orgDefaultCurrencyLocale" type="string"/>
+                     <field name="orgDisallowHtmlAttachments" type="checkbox"/>
+                     <field name="orgHasPersonAccounts" type="checkbox"/>
+                     <field name="organizationId" type="string"/>
+                     <field name="organizationMultiCurrency" type="checkbox"/>
+                     <field name="organizationName" type="string"/>
+                     <field name="profileId" type="string"/>
+                     <field name="roleId" type="string"/>
+                     <field name="sessionSecondsValid" type="double"/>
+                     <field name="userDefaultCurrencyIsoCode" type="string"/>
+                     <field name="userEmail" type="string"/>
+                     <field name="userFullName" type="string"/>
+                     <field name="userId" type="string"/>
+                     <field name="userLanguage" type="string"/>
+                     <field name="userLocale" type="string"/>
+                     <field name="userName" type="string"/>
+                     <field name="userTimeZone" type="string"/>
+                     <field name="userType" type="string"/>
+                     <field name="userUiSkin" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="GetUserInfo_AnonymousType">
+                  <description/>
+                  <detail/>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LabelsSearchMetadata">
+                  <description/>
+                  <detail>
+                     <field name="entityName" type="string"/>
+                     <field name="entityFieldLabels" type="objectlist">
+                        <options>
+                           <option name="referenceTo">NameValuePair</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LeadConvert">
+                  <description/>
+                  <detail>
+                     <field name="accountId" type="string"/>
+                     <field name="contactId" type="string"/>
+                     <field name="convertedStatus" type="string"/>
+                     <field name="doNotCreateOpportunity" type="checkbox"/>
+                     <field name="leadId" type="string"/>
+                     <field name="opportunityName" type="string"/>
+                     <field name="overwriteLeadSource" type="checkbox"/>
+                     <field name="ownerId" type="string"/>
+                     <field name="sendNotificationEmail" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LeadConvertResult">
+                  <description/>
+                  <detail>
+                     <field name="accountId" type="string"/>
+                     <field name="contactId" type="string"/>
+                     <field name="leadId" type="string"/>
+                     <field name="opportunityId" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LocaleOptions_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="language" type="string"/>
+                     <field name="localizeErrors" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LogInfo">
+                  <description/>
+                  <detail>
+                     <field name="category" type="string"/>
+                     <field name="level" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LoginResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">LoginResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LoginResult">
+                  <description/>
+                  <detail>
+                     <field name="metadataServerUrl" type="string"/>
+                     <field name="passwordExpired" type="checkbox"/>
+                     <field name="sandbox" type="checkbox"/>
+                     <field name="serverUrl" type="string"/>
+                     <field name="sessionId" type="string"/>
+                     <field name="userId" type="string"/>
+                     <field name="userInfo" type="reference">
+                        <options>
+                           <option name="referenceTo">GetUserInfoResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LoginScopeHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="organizationId" type="string"/>
+                     <field name="portalId" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Login_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="username" type="string"/>
+                     <field name="password" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="LogoutResponse_AnonymousType">
+                  <description/>
+                  <detail/>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Logout_AnonymousType">
+                  <description/>
+                  <detail/>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="MergeRequest">
+                  <description/>
+                  <detail>
+                     <field name="recordToMergeIds" type="objectlist"/>
+                     <field name="masterRecord" type="reference">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="MergeResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">MergeResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="MergeResult">
+                  <description/>
+                  <detail>
+                     <field name="id" type="string"/>
+                     <field name="mergedRecordIds" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="updatedRelatedIds" type="string"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Merge_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="request" type="objectlist">
+                        <options>
+                           <option name="referenceTo">MergeRequest</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="MruHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="updateMru" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="NameValuePair">
+                  <description/>
+                  <detail>
+                     <field name="name" type="string"/>
+                     <field name="value" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="OwnerChangeOption">
+                  <description/>
+                  <detail>
+                     <field name="type" type="string"/>
+                     <field name="execute" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="OwnerChangeOptions_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="options" type="objectlist">
+                        <options>
+                           <option name="referenceTo">OwnerChangeOption</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="PackageVersion">
+                  <description/>
+                  <detail>
+                     <field name="majorNumber" type="double"/>
+                     <field name="minorNumber" type="double"/>
+                     <field name="namespace" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="PackageVersionHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="packageVersions" type="objectlist">
+                        <options>
+                           <option name="referenceTo">PackageVersion</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="ProcessRequest">
+                  <description/>
+                  <detail>
+                     <field name="comments" type="string"/>
+                     <field name="nextApproverIds" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="ProcessResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">ProcessResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="ProcessResult">
+                  <description/>
+                  <detail>
+                     <field name="actorIds" type="string"/>
+                     <field name="entityId" type="string"/>
+                     <field name="instanceId" type="string"/>
+                     <field name="instanceStatus" type="string"/>
+                     <field name="newWorkitemIds" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Process_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="actions" type="objectlist">
+                        <options>
+                           <option name="referenceTo">ProcessRequest</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryAllResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">QueryResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryAll_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="queryString" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryMoreResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">QueryResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryMore_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="queryLocator" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryOptions_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="batchSize" type="double"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">QueryResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="QueryResult">
+                  <description/>
+                  <detail>
+                     <field name="done" type="checkbox"/>
+                     <field name="queryLocator" type="string"/>
+                     <field name="size" type="double"/>
+                     <field name="records" type="objectlist">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Query_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="queryString" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="RetrieveResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Retrieve_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="fieldList" type="string"/>
+                     <field name="sObjectType" type="string"/>
+                     <field name="ids" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SaveResult">
+                  <description/>
+                  <detail>
+                     <field name="id" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SearchRecord">
+                  <description/>
+                  <detail>
+                     <field name="record" type="reference">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                     <field name="snippet" type="reference">
+                        <options>
+                           <option name="referenceTo">SearchSnippet</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SearchResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="reference">
+                        <options>
+                           <option name="referenceTo">SearchResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SearchResult">
+                  <description/>
+                  <detail>
+                     <field name="queryId" type="string"/>
+                     <field name="searchRecords" type="objectlist">
+                        <options>
+                           <option name="referenceTo">SearchRecord</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                     <field name="searchResultsMetadata" type="reference">
+                        <options>
+                           <option name="referenceTo">SearchResultsMetadata</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SearchResultsMetadata">
+                  <description/>
+                  <detail>
+                     <field name="entityLabelMetadata" type="objectlist">
+                        <options>
+                           <option name="referenceTo">LabelsSearchMetadata</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SearchSnippet">
+                  <description/>
+                  <detail>
+                     <field name="text" type="string"/>
+                     <field name="wholeFields" type="objectlist">
+                        <options>
+                           <option name="referenceTo">NameValuePair</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Search_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="searchString" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="SessionHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="sessionId" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="StreamingEnabledHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="streamingEnabled" type="checkbox"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="UndeleteResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">UndeleteResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="UndeleteResult">
+                  <description/>
+                  <detail>
+                     <field name="id" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Undelete_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="ids" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="UpdateResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">SaveResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Update_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="sObjects" type="objectlist">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="UpsertResponse_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="result" type="objectlist">
+                        <options>
+                           <option name="referenceTo">UpsertResult</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="UpsertResult">
+                  <description/>
+                  <detail>
+                     <field name="created" type="checkbox"/>
+                     <field name="id" type="string"/>
+                     <field name="success" type="checkbox"/>
+                     <field name="errors" type="objectlist">
+                        <options>
+                           <option name="referenceTo">Error</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="Upsert_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="externalIDFieldName" type="string"/>
+                     <field name="sObjects" type="objectlist">
+                        <options>
+                           <option name="referenceTo">sObject</option>
+                           <option name="relationshipName">Child</option>
+                        </options>
+                     </field>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="UserTerritoryDeleteHeader_AnonymousType">
+                  <description/>
+                  <detail>
+                     <field name="transferToUserId" type="string"/>
+                  </detail>
+               </processObject>
+               <processObject xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                              isByCopy="true"
+                              name="sObject">
+                  <description/>
+                  <detail>
+                     <field name="fieldsToNull" type="string"/>
+                     <field name="Id" type="string"/>
+                  </detail>
+               </processObject>
+            </objects>
+         </businessConnector>
+      </types1:Entry>
+      <types1:GUID>5f8Ozyc7deuiCUwknzrlGL</types1:GUID>
+      <types1:DisplayName>SC-SFDC-SOAP</types1:DisplayName>
+   </types1:Item>
+   <types1:CurrentServerDateTime>2020-04-08T04:31:15.679Z</types1:CurrentServerDateTime>
+</aetgt:getResponse>

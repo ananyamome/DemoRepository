@@ -1,0 +1,24 @@
+{
+  "objectInfo" : {
+    "id" : "34a7MpAhoXjjVcQTXnr50p",
+    "name" : "DummyProcess",
+    "type" : "PROCESS",
+    "metadata" : {
+      "modelVersion" : {
+        "major" : 1,
+        "minor" : 0
+      },
+      "repoInfo" : {
+        "repoHandle" : "dzm5Y6tMFyglsO7-gt-14708777-2020-04-06T18:44:51.06Z::pd.xml"
+      },
+      "contextAttributes" : null,
+      "additionalInfo" : {
+        "description" : "",
+        "contentType" : null,
+        "documentState" : "VALID"
+      }
+    }
+  },
+  "dataFileExtension" : "xml",
+  "objectRefs" : [ ]
+}

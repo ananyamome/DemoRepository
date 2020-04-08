@@ -1,0 +1,44 @@
+{
+  "objectInfo" : {
+    "id" : "dj97W0m9ncal5W3KcpKEiu",
+    "name" : "CN-IICS-REST-API-test",
+    "type" : "AI_CONNECTION",
+    "metadata" : {
+      "modelVersion" : {
+        "major" : 1,
+        "minor" : 0
+      },
+      "repoInfo" : {
+        "repoHandle" : "RMloVVVVVVVVVVV-gt-5521385-2020-04-06T18:44:46.704Z::conn.xml"
+      },
+      "contextAttributes" : null,
+      "additionalInfo" : {
+        "description" : "",
+        "contentType" : null,
+        "documentState" : "VALID"
+      }
+    }
+  },
+  "dataFileExtension" : "xml",
+  "objectRefs" : [ {
+    "id" : "c7eZv4sAUamc8G9w4kxSwW",
+    "name" : "SC-IICS-REST_API-Test",
+    "type" : "AI_SERVICE_CONNECTOR",
+    "metadata" : {
+      "modelVersion" : {
+        "major" : 1,
+        "minor" : 0
+      },
+      "repoInfo" : {
+        "repoHandle" : "IFDlyjllCYAOTMn-gt-5624462-2020-04-06T18:44:46.552Z::svc.xml"
+      },
+      "contextAttributes" : null,
+      "additionalInfo" : {
+        "description" : "",
+        "contentType" : null,
+        "documentState" : "VALID"
+      }
+    },
+    "path" : "/Explore/Demo2"
+  } ]
+}

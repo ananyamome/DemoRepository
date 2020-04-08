@@ -1,0 +1,45 @@
+<aetgt:getResponse xmlns:aetgt="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"
+                   xmlns:types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd">
+   <types1:Item>
+      <types1:EntryId>RMloVVVVVVVVVVV-gt-5521385-2020-04-06T18:44:46.704Z::conn.xml</types1:EntryId>
+      <types1:Name>CN-IICS-REST-API-test-1</types1:Name>
+      <types1:MimeType>application/xml+connection</types1:MimeType>
+      <types1:Description/>
+      <types1:AppliesTo/>
+      <types1:Tags/>
+      <types1:VersionLabel>1.0</types1:VersionLabel>
+      <types1:State>CURRENT</types1:State>
+      <types1:ProcessGroup/>
+      <types1:CreatedBy>anchoudhury@informatica.com</types1:CreatedBy>
+      <types1:CreationDate>2020-04-06T18:44:47Z</types1:CreationDate>
+      <types1:ModifiedBy/>
+      <types1:PublicationStatus>unpublished</types1:PublicationStatus>
+      <types1:AutosaveExists>false</types1:AutosaveExists>
+      <types1:Entry>
+         <connection xmlns="http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd"
+                     displayName="CN-IICS-REST-API-test"
+                     label="CN-IICS-REST-API-test"
+                     name="CN-IICS-REST-API-test-1">
+            <description/>
+            <tags/>
+            <agent/>
+            <attributes>
+               <attribute encrypted="false" name="UserName" value="anchoudhury@demo.com"/>
+               <attribute encrypted="true" name="Password" value=""/>
+            </attributes>
+            <businessConnector xmlns="http://schemas.informatica.com/appmodules/screenflow/2014/04/avosConnectors.xsd"
+                               agentOnly="false"
+                               connectorPath="project:/rt.connector/SC_IICS_REST_API_Test/SC_IICS_REST_API_Test_svcDef.xml"
+                               guid="c7eZv4sAUamc8G9w4kxSwW"
+                               name="SC-IICS-REST_API-Test-1"
+                               supportsConnectionTest="false"
+                               uuid="0397d247-e2b1-4307-9e0e-b4f442f01f3d">
+               <description/>
+            </businessConnector>
+         </connection>
+      </types1:Entry>
+      <types1:GUID>dj97W0m9ncal5W3KcpKEiu</types1:GUID>
+      <types1:DisplayName>CN-IICS-REST-API-test</types1:DisplayName>
+   </types1:Item>
+   <types1:CurrentServerDateTime>2020-04-08T04:31:16.473Z</types1:CurrentServerDateTime>
+</aetgt:getResponse>

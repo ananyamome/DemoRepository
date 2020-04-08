@@ -1,0 +1,24 @@
+{
+  "objectInfo" : {
+    "id" : "9kmX8mNsY2YehGF41W3OWs",
+    "name" : "CN-POC-Salesforce",
+    "type" : "AI_CONNECTION",
+    "metadata" : {
+      "modelVersion" : {
+        "major" : 1,
+        "minor" : 0
+      },
+      "repoInfo" : {
+        "repoHandle" : "CTLPXUCZ4nzYLnz-gt-5624450-2020-04-06T18:44:45.455Z::conn.xml"
+      },
+      "contextAttributes" : null,
+      "additionalInfo" : {
+        "description" : "",
+        "contentType" : null,
+        "documentState" : "VALID"
+      }
+    }
+  },
+  "dataFileExtension" : "xml",
+  "objectRefs" : [ ]
+}
